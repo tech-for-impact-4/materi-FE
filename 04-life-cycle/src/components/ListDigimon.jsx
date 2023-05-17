@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 function ListDigimon() {
@@ -5,11 +6,15 @@ function ListDigimon() {
   console.log(1);
 
   useEffect(() => {
-    fetch("https://digimon-api.vercel.app/api/digimon")
-      .then((response) => response.json())
-      .then((result) => {
-        setDigiomons(result);
-      });
+    // fetch("https://digimon-api.vercel.app/api/digimon")
+    //   .then((response) => response.json())
+    //   .then((result) => {
+    //     setDigiomons(result);
+    //   });
+
+    axios("https://digimon-api.vercel.app/api/digimon")
+    .then(({data}) => setDigiomons(data))
+    .catch(err => console.log(err))
 
     console.log(3);
   }, []);
