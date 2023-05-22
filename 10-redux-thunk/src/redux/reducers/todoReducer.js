@@ -6,7 +6,6 @@ const initialState = {
 }
 
 // =============== todoAction.js =======================
-const GET_TODO = "GET_TODO"
 const START_FETCHING = "START_FETCHING"
 const SUCCESS_GET_TODO = "SUCCESS_GET_TODO"
 
@@ -36,6 +35,13 @@ export const getTodo = () => {
     // kirim todo ke reducer
     dispatch(successGetTodo(result.data)) 
   }
+}
+
+export const addTodo = (newTodo) => async (dispatch) => {
+  const url = "https://643e1624c72fda4a0bed5b7f.mockapi.io/todo"
+  await axios.post(url, newTodo)
+
+  dispatch(getTodo())
 }
 // =============== todoAction.js =======================
 
