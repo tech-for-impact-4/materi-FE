@@ -25,7 +25,7 @@ function TodoList() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} action="add-data">
         <input
           type="text"
           placeholder="input todo"
