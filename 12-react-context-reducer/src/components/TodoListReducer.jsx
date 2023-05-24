@@ -3,18 +3,12 @@ import { TodoReducerContext } from "../context/TodoReducerProvider";
 
 function TodoListReducer() {
   const [inputTodo, setInputTodo] = useState("");
-  const {todos, addTodo} = useContext(TodoReducerContext)
+  const {todos, addTodo, deleteTodo} = useContext(TodoReducerContext)
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    let newTodo = {
-      id: new Date().getTime(),
-      task: inputTodo,
-      isDone: false
-    }
-
-    addTodo(newTodo)
+    addTodo(inputTodo)
     setInputTodo("")
   }
 
@@ -34,7 +28,7 @@ function TodoListReducer() {
         <span style={item.isDone ? { textDecoration: "line-through" } : {}}>
           {item.task}
         </span>
-        <button>x</button>
+        <button onClick={() => deleteTodo(item.id)}>x</button>
       </div>
     ))}
     </div>

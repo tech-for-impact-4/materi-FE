@@ -9,11 +9,25 @@ const initialState = [
 ]
 
 const ADD_TODO = "ADD_TODO"
+const DELETE_TODO = "DELETE_TODO"
 
 function reducer(state, action){
   switch(action.type){
     case ADD_TODO:
-      return [action.payload, ...state]
+      let newTodo = {
+        id: new Date().getTime(),
+        task: action.payload,
+        isDone: false
+      }
+
+      console.log(newTodo);
+
+      return [newTodo, ...state]
+    
+      case DELETE_TODO:
+        const filterTodos = state.filter(item => item.id !== action.payload)
+        return filterTodos
+        
     default: return state
   }
 }
@@ -21,15 +35,22 @@ function reducer(state, action){
 function TodoReducerProvider({children}) {
   const [todos, dispatch] = useReducer(reducer, initialState)
 
-  function addTodo(newTodo){
+  function addTodo(inputTodo){
     dispatch({
       type: ADD_TODO,
-      payload: newTodo
+      payload: inputTodo
+    })
+  }
+
+  function deleteTodo(id){
+    dispatch({
+      type: DELETE_TODO,
+      payload: id
     })
   }
 
   return (
-    <TodoReducerContext.Provider value={{todos, addTodo}}>
+    <TodoReducerContext.Provider value={{todos, addTodo, deleteTodo}}>
       {children}
     </TodoReducerContext.Provider>
   )
