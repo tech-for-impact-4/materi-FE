@@ -16,18 +16,15 @@ function reducer(state, action){
     case ADD_TODO:
       let newTodo = {
         id: new Date().getTime(),
-        task: action.payload,
+        task: action.inputTodo,
         isDone: false
       }
-
-      console.log(newTodo);
-
       return [newTodo, ...state]
     
       case DELETE_TODO:
-        const filterTodos = state.filter(item => item.id !== action.payload)
+        const filterTodos = state.filter(item => item.id !== action.id)
         return filterTodos
-        
+
     default: return state
   }
 }
@@ -38,14 +35,14 @@ function TodoReducerProvider({children}) {
   function addTodo(inputTodo){
     dispatch({
       type: ADD_TODO,
-      payload: inputTodo
+      inputTodo
     })
   }
 
   function deleteTodo(id){
     dispatch({
       type: DELETE_TODO,
-      payload: id
+      id
     })
   }
 
