@@ -1,4 +1,4 @@
-import { createContext, useReducer, useState } from "react"
+import { createContext, useEffect, useReducer, useState } from "react"
 
 export const TodoReducerContext = createContext()
 
@@ -45,6 +45,12 @@ function TodoReducerProvider({children}) {
       id
     })
   }
+
+  // kalau data berasal dari API
+  // useEffect(() => {
+    // axios
+    // dispatch fetchTodo
+  // }, [])
 
   return (
     <TodoReducerContext.Provider value={{todos, addTodo, deleteTodo}}>
